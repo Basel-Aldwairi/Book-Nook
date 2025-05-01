@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.CafeCups" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/pinkPrimary</item>
+        <item name="colorPrimaryVariant">@color/pinkSecondary</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/lightPrimary</item>
+        <item name="colorSecondaryVariant"> @color/lightSecondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowBackground">@color/lightSecondary</item>
+    </style>
+
+    <style name="Theme.CafeCups" parent="Base.Theme.CafeCups" />
+
+</resources>
