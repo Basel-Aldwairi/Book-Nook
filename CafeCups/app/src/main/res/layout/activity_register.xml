@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginOTPActivity"
+    tools:context=".RegisterActivity"
     android:gravity="center"
     android:layout_margin="20dp"
     android:weightSum="100">
@@ -22,7 +22,7 @@
             android:layout_height="32dp"
             android:layout_margin="10dp"
             android:background="@drawable/circular_bg"
-            android:backgroundTint="@color/lightPrimary">
+            android:backgroundTint="@color/pinkSecondary">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
             android:layout_margin="10dp"
 
             android:background="@drawable/circular_bg"
-            android:backgroundTint="@color/pinkSecondary">
+            android:backgroundTint="@color/lightPrimary">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,13 +71,13 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/otp_icon"
+        android:src="@drawable/registeration_icon"
         app:tint="@color/pinkSecondary"
         android:layout_weight="20"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter OTP"
+        android:text="Registeration"
         android:textColor="@color/pinkSecondary"
         android:textStyle="bold"
         android:fontFamily="monospace"
@@ -91,22 +91,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center"
         android:layout_weight="5">
+
+
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:hint="OTP"
-            android:maxLength="6"
-            android:inputType="number"
+            android:hint="E-mail"
+            android:textColorHint="@color/lightPrimary"
             android:layout_margin="10dp"
             android:textColor="@color/black"
             android:background="@drawable/edit_text_rounded_cornor"
             android:elevation="5dp"
-            android:id="@+id/login_otp"/>
+            android:id="@+id/register_Email"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColorHint="@color/lightPrimary"
+            android:isCredential="true"
+            android:hint="password"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:background="@drawable/edit_text_rounded_cornor"
+            android:elevation="5dp"
+            android:id="@+id/register_password"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColorHint="@color/lightPrimary"
+            android:isCredential="true"
+            android:hint="confirm password"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:background="@drawable/edit_text_rounded_cornor"
+            android:elevation="5dp"
+            android:id="@+id/register_confirm_password"/>
     </LinearLayout>
 
     <LinearLayout
@@ -118,23 +143,21 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NEXT"
+            android:text="Register"
             android:background="@drawable/button_rounded_cornor"
-            android:id="@+id/login_next_btn"/>
+            android:id="@+id/register_btn"/>
         <ProgressBar
             android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:indeterminateTint="@color/pinkSecondary"
             android:layout_gravity="center"
-            android:id="@+id/login_progress_bar"/>
+            android:id="@+id/register_progress_bar"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go to login"
+            android:background="@drawable/button_rounded_cornor"
+            android:id="@+id/go_to_login_btn"/>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Resend OTP in 30 sec"
-        android:layout_weight="10"
-        android:id="@+id/resend_otp_textview"/>
 
 </LinearLayout>

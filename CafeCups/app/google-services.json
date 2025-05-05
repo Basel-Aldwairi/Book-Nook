@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "419537640677",
+    "firebase_url": "https://cafe-cups-backend-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "cafe-cups-backend",
     "storage_bucket": "cafe-cups-backend.firebasestorage.app"
   },
