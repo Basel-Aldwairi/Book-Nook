@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cafecups.utils.AndroidUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -46,6 +46,9 @@ public class LoginEmailActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.login_progress_bar);
         progressBar.setVisibility(GONE);
 
+        emailInput.setText(getIntent().getStringExtra("email"));
+        passwordInput.setText(getIntent().getStringExtra("password"));
+
         mAuth = FirebaseAuth.getInstance();
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +59,25 @@ public class LoginEmailActivity extends AppCompatActivity {
         goToRegisterationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginEmailActivity.this,RegisterActivity.class));
+                Intent intent = new Intent(LoginEmailActivity.this,RegisterActivity.class);
+                intent.putExtra("email",emailInput.getText().toString().trim());
+                intent.putExtra("password",passwordInput.getText().toString().trim());
+                startActivity(intent);
+
                 finish();
             }
         });
+    }
+    private void setInProgress(boolean inProgress){
+        if(inProgress){
+            progressBar.setVisibility(View.VISIBLE);
+            goToRegisterationBtn.setVisibility(View.GONE);
+            loginBtn.setVisibility(View.GONE);
+        }else{
+            progressBar.setVisibility(View.GONE);
+            goToRegisterationBtn.setVisibility(View.VISIBLE);
+            loginBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     private void validateDataAndDoLogin(){
@@ -90,33 +108,26 @@ public class LoginEmailActivity extends AppCompatActivity {
     }
 
     private void doLogin(String email, String password){
-        //AndroidUtil.showToast(LoginEmailActivity.this,"dologin");
 
-
+        setInProgress(true);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null && user.isEmailVerified()) {
-                            // Email verified, proceed to the main app
-                            Toast.makeText(LoginEmailActivity.this,
-                                    "Login successful!",
-                                    Toast.LENGTH_SHORT).show();
-                            // Intent to open your HomeActivity
+                            AndroidUtil.showToast(this,"Login successful!");
+                            setInProgress(false);
                             Intent intent = new Intent(LoginEmailActivity.this, LoginUsernameActivity.class);
+                            intent.putExtra("email",email);
                             startActivity(intent);
-                            finish();  // Optional: close login screen
+                            finish();
                         } else {
-                            // Email not verified
-                            Toast.makeText(LoginEmailActivity.this,
-                                    "Please verify your email before logging in.",
-                                    Toast.LENGTH_SHORT).show();
+                            AndroidUtil.showToast(this,"Please verify your email before logging in.");
+                            setInProgress(false);
                         }
                     } else {
-                        // Login failed
-                        Toast.makeText(LoginEmailActivity.this,
-                                "Authentication failed: " + task.getException().getMessage(),
-                                Toast.LENGTH_SHORT).show();
+                        setInProgress(false);
+                        AndroidUtil.showToast(this,"Incorrect Email or Password");
                     }
                 });
     }

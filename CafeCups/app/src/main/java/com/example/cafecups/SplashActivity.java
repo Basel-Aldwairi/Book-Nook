@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cafecups.utils.FirebaseUtil;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -25,9 +27,12 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, RegisterActivity.class));
+                if(FirebaseUtil.isLoggedIn()){
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+
+                }else startActivity(new Intent(SplashActivity.this, LoginEmailActivity.class));
                 finish();
             }
-        },500);
+        },200);
     }
 }

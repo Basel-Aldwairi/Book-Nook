@@ -46,8 +46,12 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.register_btn);
         goToLoginBtn = findViewById(R.id.go_to_login_btn);
         progressBar = findViewById(R.id.register_progress_bar);
-
+        setInProgress(false);
         mAuth = FirebaseAuth.getInstance();
+
+        emailInput.setText(getIntent().getStringExtra("email"));
+        passwordInput.setText(getIntent().getStringExtra("password"));
+
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,10 +61,24 @@ public class RegisterActivity extends AppCompatActivity {
         goToLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this,LoginEmailActivity.class));
+                Intent intent = new Intent(RegisterActivity.this,LoginEmailActivity.class);
+                intent.putExtra("email",emailInput.getText().toString().trim());
+                intent.putExtra("password",passwordInput.getText().toString().trim());
+                startActivity(intent);
                 finish();
             }
         });
+    }
+    private void setInProgress(boolean inProgress){
+        if(inProgress){
+            progressBar.setVisibility(View.VISIBLE);
+            goToLoginBtn.setVisibility(View.GONE);
+            registerBtn.setVisibility(View.GONE);
+        }else{
+            progressBar.setVisibility(View.GONE);
+            goToLoginBtn.setVisibility(View.VISIBLE);
+            registerBtn.setVisibility(View.VISIBLE);
+        }
     }
     private void validateDataAndDoRegister(){
         String email = emailInput.getText().toString().trim();
@@ -97,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
         doRegister(email,password);
     }
     private void doRegister(String email, String password){
-        registerBtn.setEnabled(false);
+        setInProgress(true);
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -109,10 +127,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 if(e instanceof FirebaseAuthUserCollisionException){
+                    setInProgress(false);
                     emailInput.setError("Email Already Registered");
                     emailInput.requestFocus();
                 }
                 else {
+                    setInProgress(false);
                     AndroidUtil.showToast(RegisterActivity.this,"Oops! Something went wrong");
                 }
             }
@@ -124,9 +144,11 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
+                        setInProgress(false);
                         AndroidUtil.showToast(RegisterActivity.this,"A verification email was sent to " + email);
                     }
                     else{
+                        setInProgress(false);
                         AndroidUtil.showToast(RegisterActivity.this,"Oops! Failed to send verification email");
                     }
                 }

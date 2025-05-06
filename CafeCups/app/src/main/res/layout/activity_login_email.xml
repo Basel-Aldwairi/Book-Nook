@@ -119,6 +119,7 @@
             android:textColor="@color/black"
             android:background="@drawable/edit_text_rounded_cornor"
             android:elevation="5dp"
+            android:inputType="textPassword"
             android:id="@+id/login_password"/>
     </LinearLayout>
 
