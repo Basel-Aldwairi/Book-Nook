@@ -50,22 +50,14 @@ public class LoginEmailActivity extends AppCompatActivity {
         passwordInput.setText(getIntent().getStringExtra("password"));
 
         mAuth = FirebaseAuth.getInstance();
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validateDataAndDoLogin();
-            }
-        });
-        goToRegisterationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginEmailActivity.this,RegisterActivity.class);
-                intent.putExtra("email",emailInput.getText().toString().trim());
-                intent.putExtra("password",passwordInput.getText().toString().trim());
-                startActivity(intent);
+        loginBtn.setOnClickListener(v -> validateDataAndDoLogin());
+        goToRegisterationBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginEmailActivity.this,RegisterActivity.class);
+            intent.putExtra("email",emailInput.getText().toString().trim());
+            intent.putExtra("password",passwordInput.getText().toString().trim());
+            startActivity(intent);
 
-                finish();
-            }
+            finish();
         });
     }
     private void setInProgress(boolean inProgress){
