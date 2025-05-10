@@ -1,8 +1,13 @@
-# Cafe-Cups
+# Book Nook
 
-#### *Read with Friends*
+### *Read with Friends*
+
+###### Code name : *Cafe Cups*
 
 ___
+
+Basel AlDwairi
+
 
 An Android app to ease reading and to combine it with social elements so
 reading doesn't seem like a lonely hobby.
