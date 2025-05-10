@@ -14,19 +14,19 @@
         android:gravity="center"
         android:orientation="vertical">
         <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:src="@drawable/logo_temp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/logo2bw_removebg_preview"
             app:tint="@color/white"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="40sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:fontFamily="monospace"
-            android:layout_marginTop="20dp"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/app_name"-->
+<!--            android:textSize="40sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textStyle="bold"-->
+<!--            android:fontFamily="monospace"-->
+<!--            android:layout_marginTop="20dp"/>-->
         <ProgressBar
             android:layout_width="32dp"
             android:layout_height="wrap_content"/>

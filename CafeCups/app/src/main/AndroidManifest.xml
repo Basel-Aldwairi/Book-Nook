@@ -19,9 +19,6 @@
             android:name=".LoginUsernameActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginOTPActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginEmailActivity"
             android:exported="false" />
         <activity
